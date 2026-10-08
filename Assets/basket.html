@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shopping Cart - Remove Product</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    .basket-container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .basket-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .basket-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+    }
+
+    .delete-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background-color: #bd2130;
+    }
+
+    .empty-msg {
+      color: #777;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="basket-container">
+    <h2>Səbətiniz</h2>
+    <ul id="basket-list" class="basket-list">
+      <li class="basket-item">
+        <span>Noutbuk - 1500 AZN</span>
+        <button class="delete-btn">Sil</button>
+      </li>
+      <li class="basket-item">
+        <span>Qulaqlıq - 120 AZN</span>
+        <button class="delete-btn">Sil</button>
+      </li>
+      <li class="basket-item">
+        <span>Qol saatı - 350 AZN</span>
+        <button class="delete-btn">Sil</button>
+      </li>
+    </ul>
+    <p id="empty-message" class="empty-msg" style="display: none;">Səbətiniz boşdur.</p>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const basketList = document.getElementById('basket-list');
+      const emptyMessage = document.getElementById('empty-message');
+
+      // Event Delegation məntiqi ilə silmə düyməsinə klikləməni tuturuq
+      basketList.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete-btn')) {
+          const itemToRemove = e.target.parentElement;
+          itemToRemove.remove();
+
+          // Səbətdə məhsul qalıb-qalmadığını yoxlayırıq
+          if (basketList.children.length === 0) {
+            emptyMessage.style.display = 'block';
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .calculator-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 25px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .input-group {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      gap: 20px;
+    }
+
+    .input-group input {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #767676;
+      border-radius: 2px;
+      width: 45%;
+      box-sizing: border-box;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      width: 100%;
+    }
+
+    .btn {
+      padding: 10px 30px;
+      font-size: 16px;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      min-width: 120px;
+    }
+
+    .btn-blue { background-color: #0066ff; }
+    .btn-red { background-color: #dc3545; }
+    .btn-green { background-color: #198754; }
+    .btn-yellow { background-color: #ffc107; color: #000; }
+
+    .result-group {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .result-group input {
+      width: 50%;
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid #767676;
+      border-radius: 2px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator-container">
+    <div class="input-group">
+      <input type="number" id="num1" placeholder="Number-1">
+      <input type="number" id="num2" placeholder="Number-2">
+    </div>
+
+    <div class="button-group">
+      <button id="btn-add" class="btn btn-blue">Toplama</button>
+      <button id="btn-sub" class="btn btn-red">Cixma</button>
+      <button id="btn-mul" class="btn btn-green">Vurma</button>
+      <button id="btn-div" class="btn btn-yellow">Bolme</button>
+    </div>
+
+    <div class="result-group">
+      <input type="text" id="result" placeholder="neticeni burani yazdirin" readonly>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const num1Input = document.getElementById('num1');
+      const num2Input = document.getElementById('num2');
+      const resultInput = document.getElementById('result');
+
+      const btnAdd = document.getElementById('btn-add');
+      const btnSub = document.getElementById('btn-sub');
+      const btnMul = document.getElementById('btn-mul');
+      const btnDiv = document.getElementById('btn-div');
+
+      function getValues() {
+        const num1 = parseFloat(num1Input.value);
+        const num2 = parseFloat(num2Input.value);
+
+        if (isNaN(num1) || isNaN(num2)) {
+          resultInput.value = "Xahiş olunur hər iki xanaya ədəd daxil edin!";
+          return null;
+        }
+        return { num1, num2 };
+      }
+
+      btnAdd.addEventListener('click', function() {
+        const val = getValues();
+        if (val) resultInput.value = val.num1 + val.num2;
+      });
+
+      btnSub.addEventListener('click', function() {
+        const val = getValues();
+        if (val) resultInput.value = val.num1 - val.num2;
+      });
+
+      btnMul.addEventListener('click', function() {
+        const val = getValues();
+        if (val) resultInput.value = val.num1 * val.num2;
+      });
+
+      btnDiv.addEventListener('click', function() {
+        const val = getValues();
+        if (val) {
+          if (val.num2 === 0) {
+            resultInput.value = "Sıfıra bölmək olmaz!";
+          } else {
+            resultInput.value = val.num1 / val.num2;
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>
